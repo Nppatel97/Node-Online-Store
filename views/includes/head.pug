@@ -6,6 +6,7 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title #{pageTitle}
         link(rel="stylesheet", href="/css/main.css")
+        link(rel="stylesheet", href="/css/twStyles.css")
         block styles
         
     div.backdrop
@@ -55,7 +56,7 @@ html(lang="en")
                         a(class=(path === '/admin/products' ? 'active' : ''), href='/admin/products') Admin Products 
             ul.mobile-nav__item-list
                 if(!isAuthenticated)
-                    li.mobile-nav__item  
+                    li.mobile-nav__item 
                         a(class=(path === '/login' ? 'active' : ''), href="/login") Login
                     li.mobile-nav__item  
                         a(class=(path === '/signup' ? 'active' : ''), href="/signup") Signup

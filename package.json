@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "start-server": "node app.js"
+    "start-server": "node app.js",
+    "build:css": "postcss public/css/tailwind.css -o public/css/twStyles.css"
   },
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "nodemon": "^2.0.12"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
@@ -29,7 +31,10 @@
     "nodemailer": "^6.7.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "pdfkit": "^0.13.0",
+    "postcss": "^8.4.13",
+    "postcss-cli": "^9.1.0",
     "pug": "^3.0.2",
-    "stripe": "^8.190.0"
+    "stripe": "^8.190.0",
+    "tailwindcss": "^3.0.24"
   }
 }
