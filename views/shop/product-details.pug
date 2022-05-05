@@ -1,0 +1,21 @@
+extends ../includes/head.pug
+block styles
+    link(rel="stylesheet", href="/css/product.css")
+
+block content 
+    main.centered
+        h1 #{product.title}
+        hr
+        div 
+            - var url = product.imageUrl
+            - var alter = product.title
+            img(src=`/${url}`, alt=alter, width="90%")
+        h2 $#{product.price} 
+        b How is it to be best described:
+        p  #{product.description} 
+        if(isAuthenticated)
+            form(action="/cart" method="POST")
+                input(type="hidden", name="_csrf", value=csrfToken)
+                button.btn(type="submit") Add to Cart 
+                - var prodId = product._id; 
+                input(type="hidden", name="productId" value=prodId)

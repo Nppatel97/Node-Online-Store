@@ -1,0 +1,44 @@
+extends ../includes/head.pug
+
+block styles
+    link(rel="stylesheet", href="/css/product.css")
+
+block content 
+    main    
+        if prods.length > 0
+            .grid 
+                each product in prods  
+                    article.card.product-item 
+                        header.card__header 
+                            h1.product__title #{product.title}
+                        .card__image
+                            - var url = product.imageUrl
+                            - var alter = product.title
+                            img(src=`/${url}`, alt=alter, width="250px")
+                        .card__content
+                            h2.product__price $#{product.price}
+                            p.product__description #{product.description}
+                        .card__actions 
+                            form(action="/add-to-cart", method="POST") 
+                            - var prodId = product._id
+                                a.btn(href=`/products/${product._id}`) Details
+                                if(isAuthenticated)
+                                    form(action="/cart" method="POST")
+                                        input(type="hidden", name="_csrf", value=csrfToken)
+                                        button.btn(type="submit") Add to Cart 
+                                        - var prodId = product._id; 
+                                        input(type="hidden", name="productId" value=prodId)
+            section.pagination  
+                if currentPage !== 1 && prevPage !== 1
+                    a(href="?page=1") 1
+                if hasPrevPage
+                    a(href="?page=" + prevPage) #{prevPage} 
+                a(href="?page=" + currentPage, class="active") #{currentPage}
+                if hasNextPage
+                    a(href="?page=" + nextPage) #{nextPage} 
+                if lastPage !== currentPage && nextPage !== lastPage
+                    a(href="?page=" + lastPage) #{lastPage} 
+        else 
+            h1 No Products Found! 
+
+

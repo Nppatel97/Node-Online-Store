@@ -1,0 +1,24 @@
+extends ../includes/head.pug
+block styles
+    link(rel="stylesheet", href="/css/product.css")
+    link(rel="stylesheet", href="/css/orders.css")
+
+block content 
+    if orders.length <= 0
+        h1.orders__item Ce la Empty!
+    else 
+        h1.order-title Your Orders
+        ul.orders  
+            for order in orders
+                li.orders__item 
+                    h1 Order ID: #{order._id}
+                    a(href="/orders/" + order._id) Order Invoice
+                    ul.orders__products 
+                        for p in order.products
+                            li.orders__products-item
+                                .item-details
+                                    p
+                                        span <b> Product: </b> #{p.product.title} (C$#{p.product.price})
+                                        br
+                                        span Quantity: #{p.quantity}
+                                    img(src=`/${p.product.imageUrl}`, alt=alter, width="150px")

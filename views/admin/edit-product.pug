@@ -1,0 +1,32 @@
+extends ../includes/head.pug
+block styles
+    link(rel="stylesheet", href="/css/forms.css")
+    link(rel="stylesheet", href="/css/product.css")
+ 
+block content 
+    main
+        if(errorMessage)
+            .user-msg.user-msg__error #{errorMessage} 
+        form(class="product-form", action=editing ? '/admin/edit-product' : '/admin/add-product', method="POST", enctype="multipart/form-data") 
+            .form-control
+                label(for="title") Title 
+                input(type="text", name="title", id="title" value=editing ? product.title : '')
+                br
+                label(for="image") Upload Image
+                input(type="file", name="image", id="image")
+                //- input(type="file", name="uploadImg", id="uploadImg")
+                //- br
+                //- label(for="UploadImg") Upload your own Image
+                br
+                label(for="price") Price (in C$)
+                input(type="text", name="price", id="price" step="0.01" value=editing ? product.price : '')
+                br
+                label(for="description") Description
+                textarea(rows="5", name="description", id="description") #{editing ? product.description : ''}
+                br
+                if editing 
+                    input(type="hidden", name="productId" value=product._id)
+                    input(type="hidden", name="productTitle" value=product.title)
+            
+            input(type="hidden", name="_csrf", value=csrfToken)
+            button(type="submit", class="btn") #{editing ? 'Update Product' : 'Add Product'}
